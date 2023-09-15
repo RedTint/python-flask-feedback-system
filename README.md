@@ -3,8 +3,6 @@
 Nothing too special. Just a simple Python Flask API + React feedback system.
 
 ## How to Setup
-
-### Python Flask API
 1. cd `./api`
 1. Run `python3 -m venv env`
 2. Run `source env/bin/activate`
@@ -12,11 +10,11 @@ Nothing too special. Just a simple Python Flask API + React feedback system.
 4. Run `python3 app.py`
     * Note: The database would be immediately instantiated if it is not yet setup
 
-## To Do List
-- [ ] Set up Python API
-  - [ ] Return list of departments `GET /departments`
-  - [ ] Store `POST /feedback`
-  - [ ] Return QR Code based on inputted route: `GET /qr={text}`
-- [ ] Set up React Frontend
-- [ ] Create QR Code Provider
-- [ ] Create Feedback Form
+## How to Use
+
+1. Navigate to `http://localhost/qr` to generate QR Codes. This QR codes redirect to `http://localhost/feedback?department={department}`.
+2. Navigate to `http://localhost/feedback?department={department}` to provide feedback.
+3. Navigate to `http://localhost/review-feedback` to view records
+
+## Customization
+1. You can change the icons available inside the `./api/static/` folder.

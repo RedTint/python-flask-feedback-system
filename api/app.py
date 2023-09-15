@@ -1,5 +1,3 @@
-import os
-import stripe
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -52,11 +50,11 @@ class DepartmentSchema(ma.Schema):
 
 class FeedbackSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'department_id', 'rating', 'message', 'date_created')
+        fields = ('id', 'department_id', 'department', 'rating', 'message', 'date_created')
 
 # Init Marshmallow Schemas
 departments_schema = DepartmentSchema(many=True)
-feedback_schema = FeedbackSchema()
+feedbacks_schema = FeedbackSchema()
 
 # Run Database Migration
 with app.app_context():
@@ -80,11 +78,17 @@ with app.app_context():
 @app.route('/qr', methods=['GET'])
 def qr():
     args = request.args.to_dict()
+
     department = args.get('department')
     if department is None:
-        return render_template('404.html')
+        department = ''
 
-    return render_template('qr.html', url=base_url, department=department, app_title=app_title)
+    all_departments = Department.query.all()
+    return render_template('qr.html',
+                            url=base_url,
+                            departments=all_departments,
+                            department=department,
+                            app_title=app_title)
 
 # returns a feedback form
 @app.route('/feedback', methods=['GET', 'POST'])
@@ -124,6 +128,18 @@ def feedback():
             status=[missing_department, missing_rating]
     )
 
+# returns all feedbacks
+@app.route('/review-feedback', methods=['GET'])
+def review_feedback():
+    all_feedbacks = db.session.query(
+        Feedback.id,
+        Feedback.rating,
+        Feedback.message,
+        Department.department,
+        Feedback.date_created
+    ).join(Department).all()
+    return render_template('review-feedback.html', feedbacks=all_feedbacks, app_title=app_title)
+
 # return all departments
 @app.route('/departments', methods=['GET'])
 @cross_origin()
@@ -132,30 +148,6 @@ def get_departments():
     result = departments_schema.dump(all_departments)
     return jsonify(result)
 
-# # creates or simply returns the stored user by 'email'
-# @app.route('/users', methods=['POST'])
-# @cross_origin()
-# def register():
-
-#     email = request.json['email']
-#     first_name = request.json['first_name']
-#     last_name = request.json['last_name']
-
-#     user = User.query.filter_by(email=email).first()
-#     if user is None:
-#         # create user
-#         new_user = User(email=email, first_name=first_name, last_name=last_name)
-#         db.session.add(new_user)
-#         db.session.commit()
-
-#         # create default project
-#         new_project = Project(is_default=True, user_id = new_user.id)
-#         db.session.add(new_project)
-#         db.session.commit()
-
-#         return user_schema.jsonify(new_user)
-
-#     return user_schema.jsonify(user)
 
 if __name__ == "__main__":
     app.run(debug=True)

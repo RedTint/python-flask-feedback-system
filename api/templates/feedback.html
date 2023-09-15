@@ -2,9 +2,9 @@
 
 {% block content %}
     <form method="post">
-        <h2 class="question">How do you feel about our service? Tap to select.</h2>
+        <h2 class="question">Please select one of the following options to rate your satisfaction with the service you received:</h2>
         {% if status[1] == True %}
-            <h2 id="emoticon-error" class="question error">Please select an emoticon.</h2>
+            <h2 id="emoticon-error" class="question error">Please select an option.</h2>
         {% endif %}
         <div class="smileys">
             <div id="happy" onclick="selectFeedback(5, 'happy')"><img src="/static/happy.png" /></div>

@@ -23,6 +23,7 @@
             margin: auto;
             gap: 12px;
         }
+
         .smileys img {
             max-width: 100%;
             height: auto;
@@ -42,7 +43,7 @@
             width: 50%;
         }
 
-        h2.question, h3.question, h2.thank-you {
+        h2.question, h3.question, h2.thank-you, h2.qr {
             text-align: center;
         }
 
@@ -58,6 +59,19 @@
             max-width: 600px;
             margin: auto;
             gap: 12px;
+        }
+
+        .qr-code-container {
+            display: flex;
+            flex-direction: column;
+            width: 75vw;
+            max-width: 600px;
+            margin: auto;
+            gap: 12px;
+            justify-content: center;
+        }
+        .qr-code-container div {
+            margin: auto;
         }
 
         /* Textarea Styles */
@@ -109,6 +123,58 @@
         /* Primary Button Active State (when clicked) */
         .primary-button:active {
             background-color: #0d47a1; /* Slightly darker shade for active effect */
+        }
+
+        /* Styling the container */
+        .select-container {
+        position: relative;
+        width: 100%;
+        }
+
+        /* Styling the label */
+        .select-label {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+        background-color: #fff;
+        padding: 0 4px;
+        font-size: 12px;
+        color: #9e9e9e;
+        pointer-events: none;
+        transition: transform 0.2s ease-out, font-size 0.2s ease-out;
+        }
+
+        /* Styling the select element */
+        .custom-select {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        appearance: none; /* Removes default arrow in Firefox */
+        background-color: #fff;
+        }
+
+        .custom-select:focus {
+        outline: none;
+        border-color: #1976d2;
+        }
+
+        /* Styling the arrow icon (optional) */
+        .select-icon {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #9e9e9e;
+        }
+
+        /* Animation for label when select has focus */
+        .custom-select:focus + .select-label, .custom-select:not(:placeholder-shown) + .select-label {
+        transform: translateY(-200%) scale(0.75);
+        font-size: 12px;
         }
     </style>
 </head>

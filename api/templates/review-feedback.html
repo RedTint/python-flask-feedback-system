@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="feedbacks">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Department</th>
+                    <th>Rating</th>
+                    <th>Message</th>
+                    <th>Date Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                    {% set no = loop.index + 1 %}
+                    {% if loop.index % 2 == 0 %}
+                        {% set bg_color = '#e6f9ff' %}
+                    {% else %}
+                        {% set bg_color = '#eee' %}
+                    {% endif %}
+                    <tr style="padding: 10px; background-color: {{ bg_color }}; margin: 20px">
+                        <td>{{ no }}</td>
+                        <td>{{ feedback.department }}</td>
+                        <td>{{ feedback.rating }}</td>
+                        <td>{{ feedback.message }}</td>
+                        <td>{{ feedback.date_created }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

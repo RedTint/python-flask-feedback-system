@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <img src="{{ qrcode(url + '/feedback?department=' + department, icon_img='icon.png', box_size=12)  }}">
+    <div class="qr-code-container">
+        <h2 class="qr">Select a department to generate a QR Code:</h2>
+        <div class="select-container" style="margin-bottom: 12px">
+            <select id="departments" class="custom-select" required>
+                <option value=""  disabled selected hidden>Select a department</option>
+                {% for d in departments %}
+                    {% if department == d.department %}
+                        <option value="{{d.department}}" selected>{{d.department}}</option>
+                    {% else %}
+                        <option value="{{d.department}}">{{d.department}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <span class="select-icon">▼</span>
+        </div>
+        <div>
+            {% if department != '' %}
+                <img src="{{ qrcode(url + '/feedback?department=' + department, icon_img='icon.png', box_size=12)  }}">
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get a reference to the select element
+            const selectElement = document.getElementById('departments');
+
+            // Add an event listener to listen for changes
+            selectElement.addEventListener('change', function() {
+                // Get the selected value
+                const selectedValue = this.value;
+                const location = window.location;
+                window.location = `http://${location.host}${location.pathname}?department=${selectedValue}`
+            });
+        });
+    </script>
 {% endblock %}
