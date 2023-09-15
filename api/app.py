@@ -93,12 +93,11 @@ def qr():
 # returns a feedback form
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-
     missing_rating = False
     missing_department = False
     if request.method == 'POST':
-        message = request.form['message']
         department = request.form['department']
+        message = request.form['message']
         rating = request.form['rating']
 
         if rating == '0':
@@ -119,8 +118,17 @@ def feedback():
             db.session.commit()
             return render_template('thank-you.html', app_title=app_title)
 
+    # get department
     args = request.args.to_dict()
     department = args.get('department')
+
+    # verify whether provided department is valid
+    if department is None:
+        return render_template('404.html', app_title=app_title)
+    department = Department.query.filter_by(department=department).first()
+    if department is None:
+        return render_template('404.html', app_title=app_title)
+
     return render_template('feedback.html',
             url=base_url,
             department=department,
