@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">
+        <h2 class="question">How do you feel about our service? Tap to select.</h2>
+        {% if status[1] == True %}
+            <h2 id="emoticon-error" class="question error">Please select an emoticon.</h2>
+        {% endif %}
+        <div class="smileys">
+            <div id="happy" onclick="selectFeedback(5, 'happy')"><img src="/static/happy.png" /></div>
+            <div id="sad" onclick="selectFeedback(1, 'sad')"><img src="/static/sad.png" /></div>
+        </div>
+        <h2 class="question">Please tell us more about our service:</h2>
+        <div class="form">
+            <div class="inputs">
+                <input type="hidden" name="department" value="{{ department }}" />
+                <input type="hidden" id="rating" name="rating" value="0" />
+                <textarea name="message"
+                    class="textarea"
+                    placeholder="Please enter your comments or suggestions here."
+                    rows="15"
+                    cols="60"
+                    >{{ request.form['message'] }}</textarea>
+            </div>
+            <div class="actions">
+                <button class="primary-button" type="submit">Submit Feedback</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        const selectFeedback = (rating, selected) => {
+            const happy = document.getElementById('happy');
+            const sad = document.getElementById('sad');
+            const input = document.getElementById('rating');
+            const emoticonError = document.getElementById('emoticon-error');
+
+            input.value = rating;
+
+            // reset class
+            happy.className = '';
+            sad.className = '';
+
+            if (!!emoticonError) emoticonError.remove();
+
+            if (selected === 'happy') {
+                sad.className = 'not-selected';
+            }
+
+            if (selected === 'sad') {
+                happy.className = 'not-selected';
+            }
+
+
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app_title }}</title>
+    <style>
+        .message {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f3f3f3
+        }
+        nav a {
+            color: #d64161;
+            font-size: 3em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+        .smileys {
+            display: flex;
+            flex-direction: row;
+            width: 75vw;
+            max-width: 600px;
+            margin: auto;
+            gap: 12px;
+        }
+        .smileys img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .smileys div {
+            width: 100%;
+            cursor: pointer;
+            transition: width 0.3s ease;
+        }
+
+        .smileys div:hover {
+            width: 130%;
+        }
+
+        .smileys div.not-selected {
+            width: 50%;
+        }
+
+        h2.question, h3.question, h2.thank-you {
+            text-align: center;
+        }
+
+        h2.question.error {
+            font-size: 1.5em;
+            color: #ff0000;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            width: 75vw;
+            max-width: 600px;
+            margin: auto;
+            gap: 12px;
+        }
+
+        /* Textarea Styles */
+        .textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Textarea Hover/Focus State */
+        .textarea:hover, .textarea:focus {
+            border-color: #1976d2; /* Material-UI primary color */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styles */
+        .primary-button {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Primary Button Default State */
+        .primary-button {
+            color: #fff;
+            background-color: #1976d2; /* Material-UI primary color */
+        }
+
+        /* Primary Button Hover State */
+        .primary-button:hover {
+            background-color: #1565c0; /* Slightly darker shade for hover effect */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Primary Button Active State (when clicked) */
+        .primary-button:active {
+            background-color: #0d47a1; /* Slightly darker shade for active effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

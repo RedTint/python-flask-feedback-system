@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <img src="{{ qrcode(url + '/feedback?department=' + department, icon_img='icon.png', box_size=12)  }}">
+{% endblock %}
