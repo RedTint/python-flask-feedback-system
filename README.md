@@ -1,6 +1,6 @@
-# Python3 + React Simple Feedback System
+# Python + Flask Simple Feedback System
 
-Nothing too special. Just a simple Python Flask API + React feedback system.
+Nothing too special. Just a simple Python + Flask feedback system.
 
 ## How to Setup
 1. cd `./api`
