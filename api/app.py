@@ -120,7 +120,7 @@ def feedback():
             new_feedback = Feedback(message=message, rating=rating, department_id=department.id)
             db.session.add(new_feedback)
             db.session.commit()
-            return render_template('thank-you.html', app_title=app_title)
+            return redirect('/thank-you')
 
     # get department
     args = request.args.to_dict()
@@ -140,6 +140,11 @@ def feedback():
             app_title=app_title,
             status=[missing_department, missing_rating]
     )
+
+# returns a feedback form
+@app.route('/thank-you', methods=['GET'])
+def thankyou():
+    return render_template('thank-you.html', app_title=app_title)
 
 # returns all feedbacks
 @app.route('/review-feedback', methods=['GET'])
