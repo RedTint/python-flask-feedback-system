@@ -124,18 +124,19 @@ def feedback():
 
     # get department
     args = request.args.to_dict()
-    department = args.get('department')
+    department_arg = args.get('department')
 
     # verify whether provided department is valid
-    if department is None:
+    if department_arg is None:
         return render_template('404.html', app_title=app_title)
-    department = Department.query.filter_by(department=department).first()
+
+    department = Department.query.filter_by(department=department_arg).first()
     if department is None:
         return render_template('404.html', app_title=app_title)
 
     return render_template('feedback.html',
             url=base_url,
-            department=department,
+            department=department_arg,
             app_title=app_title,
             status=[missing_department, missing_rating]
     )
