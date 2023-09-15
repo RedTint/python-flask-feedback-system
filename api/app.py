@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_qrcode import QRcode
@@ -72,6 +72,10 @@ with app.app_context():
 ############################
 # FLASK ENDPOINTS
 ############################
+
+@app.route('/', methods=['GET'])
+def index():
+    return redirect('/qr')
 
 # returns a generated QR code
 # note: {department} query parameter is required
