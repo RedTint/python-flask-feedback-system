@@ -19,5 +19,11 @@ Nothing too special. Just a simple Python + Flask feedback system.
 ## Database Access
 If you want to access the database and load it into another application, you can find it in the `./api/instance/` folder with file name `feedback.db`.
 
+### Resetting the Database
+Simply delete `feedback.db` and re-run the API. It should start the application from ground zero.
+
+### Modifying Departments
+In `./api/app.py`, go to Line 65. The departments are currently hard-coded. I have no plans of extending that at the moment. This was intended to be a very quick side project.
+
 ## Customization
 1. You can change the icons available inside the `./api/static/` folder.
