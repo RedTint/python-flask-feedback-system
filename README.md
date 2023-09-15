@@ -27,3 +27,5 @@ In `./api/app.py`, go to Line 65. The departments are currently hard-coded. I ha
 
 ## Customization
 1. You can change the icons available inside the `./api/static/` folder.
+2. To change the base URL from `http://127.0.0.1:5000`, go to `./api/app.py` Line 10. Note: Make sure that the route is valid. Otherwise, your QR Codes will point to non-valid URL.
+3. To change the website `<title>`, go to `./api/app.py` Line 9.
